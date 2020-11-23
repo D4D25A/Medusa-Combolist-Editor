@@ -29,7 +29,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
 os.system('cls' if os.name == 'nt' else 'clear')
-sys.stdout.write("\x1b]2;Medusa - Made by signal\x07")
+sys.stdout.write("\x1b]2;Medusa - Made by kyle-import\x07")
 
 def getch(char_width=1):
     '''get a fixed number of typed characters from the terminal. 
@@ -101,14 +101,15 @@ def securityrun():
 securityrun()
 os.system("printf '\e[9;1t'")
 
-localhwid = 'macos'
-hwid_check = requests.get('https://medusa.tools/logins/hwid.txt')
-hwid_blacklist = requests.get('https://medusa.tools/logins/blacklist.txt')
+localhwid = 'macos' # set to 'macos' to allow for seamless development
+# find a way to get a constant unique hardware identifier on macos for hwid authentication purposes
+hwid_check = requests.get('https://medusa.tools/logins/hwid.txt') # remote medusa hwid authentication files
+hwid_blacklist = requests.get('https://medusa.tools/logins/blacklist.txt') # remote medusa hwid blacklist files
 
-discord = requests.get('https://medusa.tools/logins/discord.txt')
+discord = requests.get('https://medusa.tools/logins/discord.txt') # remote medusa discord server link
 discordserver = (((discord).content).decode('utf-8'))
 
-if localhwid in (((hwid_blacklist).content).decode('utf-8')):
+if localhwid in (((hwid_blacklist).content).decode('utf-8')): # checks if hwid is in blacklist
     os.system('cls' if os.name == 'nt' else 'clear')
     print('You have been banned from Medusa. Please join our discord for more info:')
     print(discordserver)
@@ -182,7 +183,7 @@ if not os.path.exists(user_profile):
 with open(stamp,'w') as output:
   output.write("Medusa was here.")
 
-mp3file = requests.get("https://medusa.tools/music/music.wav")
+mp3file = requests.get("https://medusa.tools/music/music.wav") # remote medusa music files
 with open(music,'wb') as output:
   output.write(mp3file.content)
 
@@ -214,7 +215,7 @@ error = """
 
 for account in (((hwid_check).content).decode('utf-8')).split("\n"):
     try:
-        hwid, username, membership, access = account.split(":")
+        hwid, username, membership, access = account.split(":") # retrieves and splits medusa user data
 
     except ValueError:
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -235,10 +236,10 @@ def localcomboedits():
     os.system('cls' if os.name == 'nt' else 'clear')
     print(centered)
     securityrun()
-    localeditsauth = requests.get('https://medusa.tools/logins/localauth.txt')
+    localeditsauth = requests.get('https://medusa.tools/logins/localauth.txt') # remote medusa hwid authentication files
     for localaccount in (((localeditsauth).content).decode('utf-8')).split("\n"):
         try:
-            localedithwid, localedituser = localaccount.split(":")
+            localedithwid, localedituser = localaccount.split(":") # retrieves and splits medusa authentication data
 
         except ValueError:
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -249,7 +250,7 @@ def localcomboedits():
             input('Press enter to close Medusa...')
             sys.exit(0)
 
-    if localedithwid == localhwid and localedituser == username:
+    if localedithwid == localhwid and localedituser == username: # matches and verifies medusa authentication data
         logged = (f"Successfully logged in under, {bcolors.CYAN}"+username+f".\n{bcolors.ENDC}")
         print(logged)
         def localeditone():
@@ -298,7 +299,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                     output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -629,7 +630,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -725,7 +726,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
 
@@ -836,7 +837,7 @@ def localcomboedits():
                 default='*.txt'
 
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -945,7 +946,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -1042,7 +1043,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -1139,7 +1140,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -1237,7 +1238,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -1345,7 +1346,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -1500,130 +1501,148 @@ def localcomboedits():
                 localcomboedits()
 
 def remotecomboedits():
-    log = (f'\n{bcolors.CYAN}[{bcolors.ENDC}'+(strftime("%Y-%m-%d %H:%M:%S", gmtime()))+f'{bcolors.CYAN}] {bcolors.ENDC}')
-    HOST = '127.0.0.1'  # The server's hostname or IP address
-    PORT = 56420        # The port used by the server
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print(centered)
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((HOST, PORT))
-        print(f'{bcolors.UNDERLINE}{bcolors.OKGREEN}Connection Success.{bcolors.ENDC}')
-
-        print(f"{bcolors.UNDERLINE}Mass Remote Combolist Editing:{bcolors.ENDC}")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}Q{bcolors.CYAN}]{bcolors.ENDC} UHQ Editor - 3, 6, 7, 8 [EMAIL:PASS]\n")
-        print(f"{bcolors.UNDERLINE}Combolist Tools:{bcolors.ENDC}")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}1{bcolors.CYAN}]{bcolors.ENDC} Email to Username [EMAIL:PASS]")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}2{bcolors.CYAN}]{bcolors.ENDC} Username to Email [USERNAME:PASS]")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}3{bcolors.CYAN}]{bcolors.ENDC} Change Email to multiple Email Providers [EMAIL:PASS]")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}4{bcolors.CYAN}]{bcolors.ENDC} Remove Special Characters from Passwords [*]")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}5{bcolors.CYAN}]{bcolors.ENDC} Non-Numeric Username to Password Swap [USERNAME:PASS]")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}6{bcolors.CYAN}]{bcolors.ENDC} Non-Numeric Email to Password Swap [EMAIL:PASS]")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}7{bcolors.CYAN}]{bcolors.ENDC} Append Special Characters to Passwords [*]")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}8{bcolors.CYAN}]{bcolors.ENDC} Invert Capitalization within Passwords [x/X]")
-        print(f"\n{bcolors.OKGREEN}What would you like to do today? {bcolors.ENDC}")
-
-        loop = True
-        while loop:
-            preference = (getch())
-            if preference.upper() == "Q":
-                s.send(('Q'.encode()))
-                loop=False
-
-            elif preference.upper() == "1":
-                s.send(('1'.encode()))
-                loop=False
-
-            elif preference.upper() == "2":
-                s.send(('2'.encode()))
-                loop=False
-
-            elif preference.upper() == "3":
-                s.send(('3'.encode()))
-                loop=False
-
-            elif preference.upper() == "4":
-                s.send(('4'.encode()))
-                loop=False
-
-            elif preference.upper() == "5":
-                s.send(('5'.encode()))
-                loop=False
-
-            elif preference.upper() == "6":
-                s.send(('6'.encode()))
-                loop=False
-
-            elif preference.upper() == "7":
-                s.send(('7'.encode()))
-                loop=False
-
-            elif preference.upper() == "8":
-                s.send(('8'.encode()))
-                loop=False
-            else:
-                print('Please enter a correct input.')
-                time.sleep(1)
-                loop=False
-                os.system('cls' if os.name == 'nt' else 'clear')
-                remotecomboedits()
+    try: 
+        log = (f'\n{bcolors.CYAN}[{bcolors.ENDC}'+(strftime("%Y-%m-%d %H:%M:%S", gmtime()))+f'{bcolors.CYAN}] {bcolors.ENDC}')
+        HOST = '127.0.0.1'  # The server's hostname or IP address - currently set to medusa's listener running on localhost
+        PORT = 56420        # The port used by the server - currently set to medusa's listener running on localhost
         os.system('cls' if os.name == 'nt' else 'clear')
         print(centered)
-        print(log+'Initializing...')
-        time.sleep(3)
-        title='Select a combolist file'
-        filetypes=['*.txt']
-        default='*.txt'
-        securityrun()
-        windowicon = requests.get("https://medusa.tools/icons/icon.ico")
-        with open(tkicon,'wb') as output:
-            output.write(windowicon.content)
-        tk.iconbitmap(tkicon)
-        combofullpath = filedialog.askopenfilename(title = "Select a combolist file.",filetypes = (("Combolist File","*.txt"),("All files","*.*")))
-        combobytes = open(combofullpath, "rb").read(); comboencoding = chardet.detect(combobytes).get('encoding')
-        combolinesno = (sum(1 for line in open(combofullpath, encoding=comboencoding)))
-        with open(combofullpath,"r") as q:
-            print(log+'Reading combolist...')
-            texts = q.read()
-            comboline = texts.split("\n")
-            combolist = []
-            for i in range(combolinesno):
-                try:
-                    combopair = comboline[i]
-                    combolist.append(combopair)
-                except ValueError:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.connect((HOST, PORT))
+            print(f'{bcolors.UNDERLINE}{bcolors.OKGREEN}Connection Success.{bcolors.ENDC}')
+
+            print(f"{bcolors.UNDERLINE}Mass Remote Combolist Editing:{bcolors.ENDC}")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}Q{bcolors.CYAN}]{bcolors.ENDC} UHQ Editor - 3, 6, 7, 8 [EMAIL:PASS]\n")
+            print(f"{bcolors.UNDERLINE}Combolist Tools:{bcolors.ENDC}")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}1{bcolors.CYAN}]{bcolors.ENDC} Email to Username [EMAIL:PASS]")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}2{bcolors.CYAN}]{bcolors.ENDC} Username to Email [USERNAME:PASS]")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}3{bcolors.CYAN}]{bcolors.ENDC} Change Email to multiple Email Providers [EMAIL:PASS]")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}4{bcolors.CYAN}]{bcolors.ENDC} Remove Special Characters from Passwords [*]")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}5{bcolors.CYAN}]{bcolors.ENDC} Non-Numeric Username to Password Swap [USERNAME:PASS]")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}6{bcolors.CYAN}]{bcolors.ENDC} Non-Numeric Email to Password Swap [EMAIL:PASS]")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}7{bcolors.CYAN}]{bcolors.ENDC} Append Special Characters to Passwords [*]")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}8{bcolors.CYAN}]{bcolors.ENDC} Invert Capitalization within Passwords [x/X]")
+            print(f"\n{bcolors.OKGREEN}What would you like to do today? {bcolors.ENDC}")
+
+            loop = True
+            while loop:
+                preference = (getch())
+                if preference.upper() == "Q":
+                    s.send(('Q'.encode()))
+                    loop=False
+
+                elif preference.upper() == "1":
+                    s.send(('1'.encode()))
+                    loop=False
+
+                elif preference.upper() == "2":
+                    s.send(('2'.encode()))
+                    loop=False
+
+                elif preference.upper() == "3":
+                    s.send(('3'.encode()))
+                    loop=False
+
+                elif preference.upper() == "4":
+                    s.send(('4'.encode()))
+                    loop=False
+
+                elif preference.upper() == "5":
+                    s.send(('5'.encode()))
+                    loop=False
+
+                elif preference.upper() == "6":
+                    s.send(('6'.encode()))
+                    loop=False
+
+                elif preference.upper() == "7":
+                    s.send(('7'.encode()))
+                    loop=False
+
+                elif preference.upper() == "8":
+                    s.send(('8'.encode()))
+                    loop=False
+                else:
+                    print('Please enter a correct input.')
+                    time.sleep(1)
+                    loop=False
+                    os.system('cls' if os.name == 'nt' else 'clear')
+                    remotecomboedits()
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print(centered)
+            print(log+'Initializing...')
+            time.sleep(3)
+            title='Select a combolist file'
+            filetypes=['*.txt']
+            default='*.txt'
+            securityrun()
+            windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
+            with open(tkicon,'wb') as output:
+                output.write(windowicon.content)
+            tk.iconbitmap(tkicon)
+            combofullpath = filedialog.askopenfilename(title = "Select a combolist file.",filetypes = (("Combolist File","*.txt"),("All files","*.*")))
+            combobytes = open(combofullpath, "rb").read(); comboencoding = chardet.detect(combobytes).get('encoding')
+            combolinesno = (sum(1 for line in open(combofullpath, encoding=comboencoding)))
+            with open(combofullpath,"r") as q:
+                print(log+'Reading combolist...')
+                texts = q.read()
+                comboline = texts.split("\n")
+                combolist = []
+                for i in range(combolinesno):
+                    try:
+                        combopair = comboline[i]
+                        combolist.append(combopair)
+                    except ValueError:
+                        pass
+                print(log+'Packaging combolist...')
+                combostring = str(combolist)
+                comboencoded = combostring.encode()
+                print(log+'Sending combolist...')
+                s.send(comboencoded)
+                print(log+'Sent!')
+                print(log+'Waiting for server response...')
+                comboedittedencoded = s.recv(7516192768)
+                print(log+'Received server response...')
+                comboeditteddecoded = comboedittedencoded.decode()
+                print(log+'Decoding editted combolist...')
+                combostrlist = literal_eval(comboeditteddecoded)
+                print(log+'Saving editted combolist...')
+                orgfilename = str(HOST+'_'+datetime.today().strftime('%Y-%m-%d')+'.txt')
+                with open(orgfilename, mode='wt', encoding='utf-8') as myfile:
+                                myfile.write('\n'.join(combostrlist))
+                                myfile.write('\n')
+                print(log+'Saved list, exiting...')
+                print(f"\n{bcolors.UNDERLINE}Navigation Options:{bcolors.ENDC}")
+                print(f"{bcolors.CYAN}[{bcolors.ENDC}B{bcolors.CYAN}]{bcolors.ENDC} Back to Local Combolist Edit Options")
+                print(f"{bcolors.CYAN}[{bcolors.ENDC}M{bcolors.CYAN}]{bcolors.ENDC} Back to Main Menu")
+                print(f"{bcolors.OKGREEN}What would you like to do today? {bcolors.ENDC}"); emailtouserpreference = (getch())
+
+                if emailtouserpreference.upper() == "M":
+                    mainui()
+                else:
                     pass
-            print(log+'Packaging combolist...')
-            combostring = str(combolist)
-            comboencoded = combostring.encode()
-            print(log+'Sending combolist...')
-            s.send(comboencoded)
-            print(log+'Sent!')
-            print(log+'Waiting for server response...')
-            comboedittedencoded = s.recv(7516192768)
-            print(log+'Received server response...')
-            comboeditteddecoded = comboedittedencoded.decode()
-            print(log+'Decoding editted combolist...')
-            combostrlist = literal_eval(comboeditteddecoded)
-            print(log+'Saving editted combolist...')
-            orgfilename = str(HOST+'_'+datetime.today().strftime('%Y-%m-%d')+'.txt')
-            with open(orgfilename, mode='wt', encoding='utf-8') as myfile:
-                            myfile.write('\n'.join(combostrlist))
-                            myfile.write('\n')
-            print(log+'Saved list, exiting...')
-            print(f"\n{bcolors.UNDERLINE}Navigation Options:{bcolors.ENDC}")
-            print(f"{bcolors.CYAN}[{bcolors.ENDC}B{bcolors.CYAN}]{bcolors.ENDC} Back to Local Combolist Edit Options")
-            print(f"{bcolors.CYAN}[{bcolors.ENDC}M{bcolors.CYAN}]{bcolors.ENDC} Back to Main Menu")
-            print(f"{bcolors.OKGREEN}What would you like to do today? {bcolors.ENDC}"); emailtouserpreference = (getch())
 
-            if emailtouserpreference.upper() == "M":
-                mainui()
-            else:
-                pass
+                if emailtouserpreference.upper() == "B":
+                    localcomboedits()
+                else:
+                    pass
+    except ConnectionRefusedError:
+        print(f'{bcolors.UNDERLINE}{bcolors.FAIL}Connection failed.{bcolors.ENDC}')
+        print(f"\n{bcolors.UNDERLINE}Navigation Options:{bcolors.ENDC}")
+        print(f"{bcolors.CYAN}[{bcolors.ENDC}B{bcolors.CYAN}]{bcolors.ENDC} Back to Local Combolist Edit Options")
+        print(f"{bcolors.CYAN}[{bcolors.ENDC}M{bcolors.CYAN}]{bcolors.ENDC} Back to Main Menu")
+        print(f"{bcolors.OKGREEN}What would you like to do today? {bcolors.ENDC}"); emailtouserpreference = (getch())
 
-            if emailtouserpreference.upper() == "B":
-                localcomboedits()
-            else:
-                pass
+        if emailtouserpreference.upper() == "M":
+            mainui()
+        else:
+            pass
+
+        if emailtouserpreference.upper() == "B":
+            localcomboedits()
+        else:
+            pass
+
 
 def cloudstorage():
      
@@ -1957,7 +1976,7 @@ centered = (f"""{bcolors.OKBLUE}
 print(centered)
 version = "1.0.0"
 
-versionid = (((requests.get('https://medusa.tools/logins/version.txt')).content).decode('utf-8'))
+versionid = (((requests.get('https://medusa.tools/logins/version.txt')).content).decode('utf-8')) # remote medusa version verification
 time.sleep(1)
 
 
@@ -1993,7 +2012,7 @@ while loop:
         time.sleep(1)
         os.system('cls' if os.name == 'nt' else 'clear')
         print(centered)
-        sys.stdout.write(f"\x1b]2;Medusa - Made by signal | Logged in under: {username}\x07")
+        sys.stdout.write(f"\x1b]2;Medusa - Made by kyle-import | Logged in under: {username}\x07")
         welcome = (f"Welcome back, {bcolors.CYAN}"+username+f".\n{bcolors.ENDC}")
         for char in welcome:
             time.sleep(0.010)
@@ -2013,7 +2032,7 @@ while loop:
         print("\n")
         print("\n")
         print("\n")
-        print("Your HWID is not authenticated or there was an error connecting to the authentication server.")
+        print("Your HWID is not authenticated or there was an error connecting to the hwid authentication server.")
         print("Go to https://medusa.tools to buy Medusa or receive support.")
         input("\nPress enter to close...")
         sys.exit(0)

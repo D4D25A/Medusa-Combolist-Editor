@@ -29,7 +29,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
 os.system('cls' if os.name == 'nt' else 'clear')
-ctypes.windll.kernel32.SetConsoleTitleW("Medusa - Made by signal")
+ctypes.windll.kernel32.SetConsoleTitleW("Medusa - Made by kyle-import")
 
 def checkIfProcessRunning(processName):
     '''
@@ -100,14 +100,15 @@ def securityrun():
 securityrun()
 os.system("mode con cols=100 lines=35")
 
-localhwid = subprocess.check_output('wmic csproduct get uuid').decode().split('\n')[1].strip()
-hwid_check = requests.get('https://medusa.tools/logins/hwid.txt')
-hwid_blacklist = requests.get('https://medusa.tools/logins/blacklist.txt')
+localhwid = 'windows' # set to 'windows' to allow for seamless development
+# localhwid = subprocess.check_output('wmic csproduct get uuid').decode().split('\n')[1].strip() # a working way to get a constant unique hardware identifier on windows for hwid authentication purposes
+hwid_check = requests.get('https://medusa.tools/logins/hwid.txt') # remote medusa hwid authentication files
+hwid_blacklist = requests.get('https://medusa.tools/logins/blacklist.txt') # remote medusa hwid blacklist files
 
-discord = requests.get('https://medusa.tools/logins/discord.txt')
+discord = requests.get('https://medusa.tools/logins/discord.txt') # remote medusa discord server link
 discordserver = (((discord).content).decode('utf-8'))
 
-if localhwid in (((hwid_blacklist).content).decode('utf-8')):
+if localhwid in (((hwid_blacklist).content).decode('utf-8')): # checks if hwid is in blacklist
     os.system('cls' if os.name == 'nt' else 'clear')
     print('You have been banned from Medusa. Please join our discord for more info:')
     print(discordserver)
@@ -181,7 +182,7 @@ if not os.path.exists(user_profile):
 with open(stamp,'w') as output:
   output.write("Medusa was here.")
 
-mp3file = requests.get("https://medusa.tools/music/music.wav")
+mp3file = requests.get("https://medusa.tools/music/music.wav") # remote medusa music files
 with open(music,'wb') as output:
   output.write(mp3file.content)
 
@@ -213,7 +214,7 @@ error = """
 
 for account in (((hwid_check).content).decode('utf-8')).split("\n"):
     try:
-        hwid, username, membership, access = account.split(":")
+        hwid, username, membership, access = account.split(":") # retrieves and splits medusa user data
 
     except ValueError:
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -234,10 +235,10 @@ def localcomboedits():
     os.system('cls' if os.name == 'nt' else 'clear')
     print(centered)
     securityrun()
-    localeditsauth = requests.get('https://medusa.tools/logins/localauth.txt')
+    localeditsauth = requests.get('https://medusa.tools/logins/localauth.txt') # remote medusa hwid authentication files
     for localaccount in (((localeditsauth).content).decode('utf-8')).split("\n"):
         try:
-            localedithwid, localedituser = localaccount.split(":")
+            localedithwid, localedituser = localaccount.split(":") # retrieves and splits medusa authentication data
 
         except ValueError:
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -248,7 +249,7 @@ def localcomboedits():
             input('Press enter to close Medusa...')
             sys.exit(0)
 
-    if localedithwid == localhwid and localedituser == username:
+    if localedithwid == localhwid and localedituser == username: # matches and verifies medusa authentication data
         logged = align_center(f" Successfully logged in under, {bcolors.CYAN}"+username+f".\n{bcolors.ENDC}", 105)
         print(logged)
         def localeditone():
@@ -297,7 +298,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                     output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -627,7 +628,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -722,7 +723,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
 
@@ -832,7 +833,7 @@ def localcomboedits():
                 default='*.txt'
 
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -940,7 +941,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -1036,7 +1037,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -1132,7 +1133,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -1229,7 +1230,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -1336,7 +1337,7 @@ def localcomboedits():
                 filetypes=['*.txt']
                 default='*.txt'
                 securityrun()
-                windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+                windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
                 with open(tkicon,'wb') as output:
                   output.write(windowicon.content)
                 tk.iconbitmap(tkicon)
@@ -1564,7 +1565,7 @@ def remotecomboedits():
         filetypes=['*.txt']
         default='*.txt'
         securityrun()
-        windowicon = requests.get("https://medusa.tools/icons/icon.ico")
+        windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
         with open(tkicon,'wb') as output:
             output.write(windowicon.content)
         tk.iconbitmap(tkicon)
@@ -1947,7 +1948,7 @@ centered = align_center(text, 100)
 print(centered)
 version = "1.0.0"
 
-versionid = (((requests.get('https://medusa.tools/logins/version.txt')).content).decode('utf-8'))
+versionid = (((requests.get('https://medusa.tools/logins/version.txt')).content).decode('utf-8')) # remote medusa version verification
 time.sleep(1)
 
 
@@ -1983,7 +1984,7 @@ while loop:
         time.sleep(1)
         os.system('cls' if os.name == 'nt' else 'clear')
         print(centered)
-        ctypes.windll.kernel32.SetConsoleTitleW("Medusa - Made by signal | Logged in under: "+str(username))
+        ctypes.windll.kernel32.SetConsoleTitleW("Medusa - Made by kyle-import | Logged in under: "+str(username))
         welcome = align_center(f" Welcome back, {bcolors.CYAN}"+username+f".\n{bcolors.ENDC}", 105)
         for char in welcome:
             time.sleep(0.010)
