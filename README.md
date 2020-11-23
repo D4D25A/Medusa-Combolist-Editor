@@ -7,5 +7,5 @@
 
 
 ## Quick start guide for Medusa Client
-Run ```pip3 install -r ./windows/requirements.txt``` or ```pip3 install -r ./macos/requirements.txt```
+Run ```pip3 install -r ./windows/requirements.txt``` or ```pip3 install -r ./macos/requirements.txt```   
 then ```python3 medusa.py```
