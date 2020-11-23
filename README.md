@@ -9,6 +9,10 @@
 
 ![](img/medusa-localui.jpg)
 
-## Quick start guide for Medusa Client
+## Quick start guide for Medusa Local Client
 Run ```pip3 install -r ./windows/requirements.txt``` or ```pip3 install -r ./macos/requirements.txt```   
 then ```python3 medusa.py```
+
+## Quick start guide for Medusa Remote Server (optional)
+Run ```pip3 install -r ./server/windows/requirements.txt```
+then ```python3 listener.py```
