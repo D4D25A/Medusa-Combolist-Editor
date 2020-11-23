@@ -1,6 +1,4 @@
-![](logos/medusa-whitebg.jpeg)
-
-## Medusa
+![](logos/medusa-whitebg.png)
 
 ## A advanced multi-function combolist editor written in one python file.
 *Medusa is a proof-of-concept multi-function advanced combolist editor which has a variety of editing features.*
@@ -9,5 +7,5 @@
 
 
 ## Quick start guide for Medusa Client
-Run ```pip3 install -r ./windows/requirements.txt``` or ```pip3 install -r ./macos/requirements.txt```
+Run ```pip3 install -r ./windows/requirements.txt``` or ```pip3 install -r ./macos/requirements.txt```   
 then ```python3 medusa.py```
