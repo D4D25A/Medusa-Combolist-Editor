@@ -1,6 +1,4 @@
-![](logos/medusa-whitebg.jpeg)
-
-## Medusa
+![](logos/medusa-whitebg.png)
 
 ## A advanced multi-function combolist editor written in one python file.
 *Medusa is a proof-of-concept multi-function advanced combolist editor which has a variety of editing features.*
