@@ -1491,129 +1491,146 @@ def localcomboedits():
                 localcomboedits()
 
 def remotecomboedits():
-    log = (f'\n{bcolors.CYAN}[{bcolors.ENDC}'+(strftime("%Y-%m-%d %H:%M:%S", gmtime()))+f'{bcolors.CYAN}] {bcolors.ENDC}')
-    HOST = '127.0.0.1'  # The server's hostname or IP address
-    PORT = 56420        # The port used by the server
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print(centered)
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((HOST, PORT))
-        print(f'{bcolors.UNDERLINE}{bcolors.OKGREEN}Connection Success.{bcolors.ENDC}')
-
-        print(f"{bcolors.UNDERLINE}Mass Remote Combolist Editing:{bcolors.ENDC}")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}Q{bcolors.CYAN}]{bcolors.ENDC} UHQ Editor - 3, 6, 7, 8 [EMAIL:PASS]\n")
-        print(f"{bcolors.UNDERLINE}Combolist Tools:{bcolors.ENDC}")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}1{bcolors.CYAN}]{bcolors.ENDC} Email to Username [EMAIL:PASS]")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}2{bcolors.CYAN}]{bcolors.ENDC} Username to Email [USERNAME:PASS]")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}3{bcolors.CYAN}]{bcolors.ENDC} Change Email to multiple Email Providers [EMAIL:PASS]")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}4{bcolors.CYAN}]{bcolors.ENDC} Remove Special Characters from Passwords [*]")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}5{bcolors.CYAN}]{bcolors.ENDC} Non-Numeric Username to Password Swap [USERNAME:PASS]")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}6{bcolors.CYAN}]{bcolors.ENDC} Non-Numeric Email to Password Swap [EMAIL:PASS]")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}7{bcolors.CYAN}]{bcolors.ENDC} Append Special Characters to Passwords [*]")
-        print(f"{bcolors.CYAN}[{bcolors.ENDC}8{bcolors.CYAN}]{bcolors.ENDC} Invert Capitalization within Passwords [x/X]")
-        print(f"\n{bcolors.OKGREEN}What would you like to do today? {bcolors.ENDC}")
-
-        loop = True
-        while loop:
-            preference = (msvcrt.getch()).decode("utf-8")
-            if preference.upper() == "Q":
-                s.send(('Q'.encode()))
-                loop=False
-
-            elif preference.upper() == "1":
-                s.send(('1'.encode()))
-                loop=False
-
-            elif preference.upper() == "2":
-                s.send(('2'.encode()))
-                loop=False
-
-            elif preference.upper() == "3":
-                s.send(('3'.encode()))
-                loop=False
-
-            elif preference.upper() == "4":
-                s.send(('4'.encode()))
-                loop=False
-
-            elif preference.upper() == "5":
-                s.send(('5'.encode()))
-                loop=False
-
-            elif preference.upper() == "6":
-                s.send(('6'.encode()))
-                loop=False
-
-            elif preference.upper() == "7":
-                s.send(('7'.encode()))
-                loop=False
-
-            elif preference.upper() == "8":
-                s.send(('8'.encode()))
-                loop=False
-            else:
-                print('Please enter a correct input.')
-                time.sleep(1)
-                loop=False
-                os.system('cls' if os.name == 'nt' else 'clear')
-                remotecomboedits()
+    try:
+        log = (f'\n{bcolors.CYAN}[{bcolors.ENDC}'+(strftime("%Y-%m-%d %H:%M:%S", gmtime()))+f'{bcolors.CYAN}] {bcolors.ENDC}')
+        HOST = '127.0.0.1'  # The server's hostname or IP address
+        PORT = 56420        # The port used by the server
         os.system('cls' if os.name == 'nt' else 'clear')
         print(centered)
-        print(log+'Initializing...')
-        time.sleep(3)
-        title='Select a combolist file'
-        filetypes=['*.txt']
-        default='*.txt'
-        securityrun()
-        windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
-        with open(tkicon,'wb') as output:
-            output.write(windowicon.content)
-        tk.iconbitmap(tkicon)
-        combofullpath = filedialog.askopenfilename(title = "Select a combolist file.",filetypes = (("Combolist File","*.txt"),("All files","*.*")))
-        combolinesno = (sum(1 for line in open(combofullpath)))
-        with open(combofullpath,"r") as q:
-            print(log+'Reading combolist...')
-            texts = q.read()
-            comboline = texts.split("\n")
-            combolist = []
-            for i in range(combolinesno):
-                try:
-                    combopair = comboline[i]
-                    combolist.append(combopair)
-                except ValueError:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.connect((HOST, PORT))
+            print(f'{bcolors.UNDERLINE}{bcolors.OKGREEN}Connection Success.{bcolors.ENDC}')
+
+            print(f"{bcolors.UNDERLINE}Mass Remote Combolist Editing:{bcolors.ENDC}")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}Q{bcolors.CYAN}]{bcolors.ENDC} UHQ Editor - 3, 6, 7, 8 [EMAIL:PASS]\n")
+            print(f"{bcolors.UNDERLINE}Combolist Tools:{bcolors.ENDC}")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}1{bcolors.CYAN}]{bcolors.ENDC} Email to Username [EMAIL:PASS]")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}2{bcolors.CYAN}]{bcolors.ENDC} Username to Email [USERNAME:PASS]")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}3{bcolors.CYAN}]{bcolors.ENDC} Change Email to multiple Email Providers [EMAIL:PASS]")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}4{bcolors.CYAN}]{bcolors.ENDC} Remove Special Characters from Passwords [*]")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}5{bcolors.CYAN}]{bcolors.ENDC} Non-Numeric Username to Password Swap [USERNAME:PASS]")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}6{bcolors.CYAN}]{bcolors.ENDC} Non-Numeric Email to Password Swap [EMAIL:PASS]")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}7{bcolors.CYAN}]{bcolors.ENDC} Append Special Characters to Passwords [*]")
+            print(f"{bcolors.CYAN}[{bcolors.ENDC}8{bcolors.CYAN}]{bcolors.ENDC} Invert Capitalization within Passwords [x/X]")
+            print(f"\n{bcolors.OKGREEN}What would you like to do today? {bcolors.ENDC}")
+
+            loop = True
+            while loop:
+                preference = (msvcrt.getch()).decode("utf-8")
+                if preference.upper() == "Q":
+                    s.send(('Q'.encode()))
+                    loop=False
+
+                elif preference.upper() == "1":
+                    s.send(('1'.encode()))
+                    loop=False
+
+                elif preference.upper() == "2":
+                    s.send(('2'.encode()))
+                    loop=False
+
+                elif preference.upper() == "3":
+                    s.send(('3'.encode()))
+                    loop=False
+
+                elif preference.upper() == "4":
+                    s.send(('4'.encode()))
+                    loop=False
+
+                elif preference.upper() == "5":
+                    s.send(('5'.encode()))
+                    loop=False
+
+                elif preference.upper() == "6":
+                    s.send(('6'.encode()))
+                    loop=False
+
+                elif preference.upper() == "7":
+                    s.send(('7'.encode()))
+                    loop=False
+
+                elif preference.upper() == "8":
+                    s.send(('8'.encode()))
+                    loop=False
+                else:
+                    print('Please enter a correct input.')
+                    time.sleep(1)
+                    loop=False
+                    os.system('cls' if os.name == 'nt' else 'clear')
+                    remotecomboedits()
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print(centered)
+            print(log+'Initializing...')
+            time.sleep(3)
+            title='Select a combolist file'
+            filetypes=['*.txt']
+            default='*.txt'
+            securityrun()
+            windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
+            with open(tkicon,'wb') as output:
+                output.write(windowicon.content)
+            tk.iconbitmap(tkicon)
+            combofullpath = filedialog.askopenfilename(title = "Select a combolist file.",filetypes = (("Combolist File","*.txt"),("All files","*.*")))
+            combolinesno = (sum(1 for line in open(combofullpath)))
+            with open(combofullpath,"r") as q:
+                print(log+'Reading combolist...')
+                texts = q.read()
+                comboline = texts.split("\n")
+                combolist = []
+                for i in range(combolinesno):
+                    try:
+                        combopair = comboline[i]
+                        combolist.append(combopair)
+                    except ValueError:
+                        pass
+                print(log+'Packaging combolist...')
+                combostring = str(combolist)
+                comboencoded = combostring.encode()
+                print(log+'Sending combolist...')
+                s.send(comboencoded)
+                print(log+'Sent!')
+                print(log+'Waiting for server response...')
+                comboedittedencoded = s.recv(9060798464)
+                print(log+'Received server response...')
+                comboeditteddecoded = comboedittedencoded.decode()
+                print(log+'Decoding editted combolist...')
+                combostrlist = literal_eval(comboeditteddecoded)
+                print(log+'Saving editted combolist...')
+                orgfilename = str(HOST+'_'+datetime.today().strftime('%Y-%m-%d')+'.txt')
+                with open(orgfilename, mode='wt', encoding='utf-8') as myfile:
+                                myfile.write('\n'.join(combostrlist))
+                                myfile.write('\n')
+                print(log+'Saved list, exiting...')
+                print(f"\n{bcolors.UNDERLINE}Navigation Options:{bcolors.ENDC}")
+                print(f"{bcolors.CYAN}[{bcolors.ENDC}B{bcolors.CYAN}]{bcolors.ENDC} Back to Local Combolist Edit Options")
+                print(f"{bcolors.CYAN}[{bcolors.ENDC}M{bcolors.CYAN}]{bcolors.ENDC} Back to Main Menu")
+                print(f"{bcolors.OKGREEN}What would you like to do today? {bcolors.ENDC}"); emailtouserpreference = (msvcrt.getch()).decode("utf-8")
+
+                if emailtouserpreference.upper() == "M":
+                    mainui()
+                else:
                     pass
-            print(log+'Packaging combolist...')
-            combostring = str(combolist)
-            comboencoded = combostring.encode()
-            print(log+'Sending combolist...')
-            s.send(comboencoded)
-            print(log+'Sent!')
-            print(log+'Waiting for server response...')
-            comboedittedencoded = s.recv(9060798464)
-            print(log+'Received server response...')
-            comboeditteddecoded = comboedittedencoded.decode()
-            print(log+'Decoding editted combolist...')
-            combostrlist = literal_eval(comboeditteddecoded)
-            print(log+'Saving editted combolist...')
-            orgfilename = str(HOST+'_'+datetime.today().strftime('%Y-%m-%d')+'.txt')
-            with open(orgfilename, mode='wt', encoding='utf-8') as myfile:
-                            myfile.write('\n'.join(combostrlist))
-                            myfile.write('\n')
-            print(log+'Saved list, exiting...')
-            print(f"\n{bcolors.UNDERLINE}Navigation Options:{bcolors.ENDC}")
-            print(f"{bcolors.CYAN}[{bcolors.ENDC}B{bcolors.CYAN}]{bcolors.ENDC} Back to Local Combolist Edit Options")
-            print(f"{bcolors.CYAN}[{bcolors.ENDC}M{bcolors.CYAN}]{bcolors.ENDC} Back to Main Menu")
-            print(f"{bcolors.OKGREEN}What would you like to do today? {bcolors.ENDC}"); emailtouserpreference = (msvcrt.getch()).decode("utf-8")
 
-            if emailtouserpreference.upper() == "M":
-                mainui()
-            else:
-                pass
+                if emailtouserpreference.upper() == "B":
+                    localcomboedits()
+                else:
+                    pass
+    except ConnectionRefusedError:
+        print(f'{bcolors.UNDERLINE}{bcolors.FAIL}Connection failed.{bcolors.ENDC}')
+        print(f"\n{bcolors.UNDERLINE}Navigation Options:{bcolors.ENDC}")
+        print(f"{bcolors.CYAN}[{bcolors.ENDC}B{bcolors.CYAN}]{bcolors.ENDC} Back to Local Combolist Edit Options")
+        print(f"{bcolors.CYAN}[{bcolors.ENDC}M{bcolors.CYAN}]{bcolors.ENDC} Back to Main Menu")
+        print(f"{bcolors.OKGREEN}What would you like to do today? {bcolors.ENDC}"); emailtouserpreference = (getch())
 
-            if emailtouserpreference.upper() == "B":
-                localcomboedits()
-            else:
-                pass
+        if emailtouserpreference.upper() == "M":
+            mainui()
+        else:
+            pass
+
+        if emailtouserpreference.upper() == "B":
+            localcomboedits()
+        else:
+            pass 
 
 def cloudstorage():
      
