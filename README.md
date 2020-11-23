@@ -1,4 +1,4 @@
-![]()
+![](logos/medusa-whitebg.jpeg)
 
 ## Medusa
 
@@ -8,6 +8,6 @@
 *Medusa is a completely experimental concept. The files pushed to this repository are not distribution ready, although they are still very much usable*
 
 
-## Quick start guide for Aquatify's source
-Run ```
-Run ```python3 medusa.py```
+## Quick start guide for Medusa Client
+Run ```pip3 install -r ./windows/requirements.txt``` or ```pip3 install -r ./macos/requirements.txt```
+then ```python3 medusa.py```
