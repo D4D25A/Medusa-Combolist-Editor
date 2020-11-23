@@ -20,3 +20,7 @@ ntpath
 re
 webbrowser
 tkinter
+ast
+datetime
+pygame
+playsound
