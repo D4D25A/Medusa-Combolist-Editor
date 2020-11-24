@@ -101,7 +101,7 @@ def securityrun():
 securityrun()
 os.system("printf '\e[9;1t'")
 
-localhwid = 'macos' # set to 'macos' to allow for seamless development
+localhwid = 'dev' # set to 'dev' to allow for seamless development
 # find a way to get a constant unique hardware identifier on macos for hwid authentication purposes
 hwid_check = requests.get('https://medusa.tools/logins/hwid.txt') # remote medusa hwid authentication files
 hwid_blacklist = requests.get('https://medusa.tools/logins/blacklist.txt') # remote medusa hwid blacklist files

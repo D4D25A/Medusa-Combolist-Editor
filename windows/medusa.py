@@ -100,7 +100,7 @@ def securityrun():
 securityrun()
 os.system("mode con cols=100 lines=35")
 
-localhwid = 'windows' # set to 'windows' to allow for seamless development
+localhwid = 'dev' # set to 'dev' to allow for seamless development
 # localhwid = subprocess.check_output('wmic csproduct get uuid').decode().split('\n')[1].strip() # a working way to get a constant unique hardware identifier on windows for hwid authentication purposes
 hwid_check = requests.get('https://medusa.tools/logins/hwid.txt') # remote medusa hwid authentication files
 hwid_blacklist = requests.get('https://medusa.tools/logins/blacklist.txt') # remote medusa hwid blacklist files
