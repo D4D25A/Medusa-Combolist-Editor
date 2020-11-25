@@ -1,6 +1,5 @@
 selenium
 send
-discord_webhook
 requests
 chardet
 psutil
