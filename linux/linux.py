@@ -74,6 +74,7 @@ def securityrun():
     else:
         pass
 
+securityrun()
 os.system("printf '\e[9;1t'")
 
 localhwid = 'test' # set to 'dev' to allow for seamless development
@@ -102,19 +103,44 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 securitycheck = False
-print(f'\rSecurity Checks...')
-securityrun()
+def securityloader():
+    for c in itertools.cycle(['|', '/', '-', '\\']):
+        if securitycheck:
+            break
+        sys.stdout.write('\rSecurity Checks... '+c)
+        sys.stdout.flush()
+        time.sleep(0.1)
+
+t = threading.Thread(target=securityloader)
+t.start()
+
+time.sleep(2)
 securitycheck = True
 print(f'\rSecurity Checks... {bcolors.OKGREEN}DONE{bcolors.ENDC}')
 time.sleep(2)
 os.system('cls' if os.name == 'nt' else 'clear')
+
+loaddone = False
+def animateload():
+    for c in itertools.cycle(['|', '/', '-', '\\']):
+        if loaddone:
+            break
+        sys.stdout.write('\rLoading '+c)
+        sys.stdout.flush()
+        time.sleep(0.1)
+
+t = threading.Thread(target=animateload)
+t.start()
+
+time.sleep(5)
+loaddone = True
 
 if not os.path.exists(user_profile):
     os.makedirs(user_profile)
 
 with open(stamp,'w') as output:
   output.write("Medusa was here.")
-
+print(f'Downloading {bcolors.OKGREEN}dependencies{bcolors.ENDC}...')
 mp3file = requests.get("https://medusa.tools/music/music.wav") # remote medusa music files
 with open(music,'wb') as output:
   output.write(mp3file.content)
@@ -124,7 +150,7 @@ try:
     medusamusic.set_volume(0.15)
     medusamusic.play(-1)
     musicerror = 0
-except pygame.error: 
+except pygame.error:
     musicerror = 1
     pass
 
@@ -1523,7 +1549,7 @@ def enablemusic():
     if musicerror == '1':
         print("Music Module Error!")
         time.sleep(1)
-        mainui
+        mainui()
 
 def disablemusic():
     if musicerror == '0':
@@ -1534,7 +1560,7 @@ def disablemusic():
     if musicerror == '1':
         print("Music Module Error!")
         time.sleep(1)
-        mainui
+        mainui()
 
 def mainui():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -1625,16 +1651,25 @@ while loop:
         authvalue = s.recv(128).decode() # receives authentication reponse from medusa authentication server
         if authvalue =='1': # verifies medusa authentication response as successful
             suc = (f"\n{bcolors.OKGREEN}Authentication successful...{bcolors.ENDC}")
-            print(suc)
+            for char in suc:
+                time.sleep(0.010)
+                sys.stdout.write(char)
+                sys.stdout.flush()
             load = ("\nLoading...")
-            print(load)
+            for char in load:
+                time.sleep(0.010)
+                sys.stdout.write(char)
+                sys.stdout.flush()
             loop = False
             time.sleep(1)
             os.system('cls' if os.name == 'nt' else 'clear')
             print(centered)
             sys.stdout.write(f"\x1b]2;Medusa - Made by kyle-import | Log-in successful. \x07")
             welcome = (f"Welcome back!\n{bcolors.ENDC}")
-            print(welcome)
+            for char in welcome:
+                time.sleep(0.010)
+                sys.stdout.write(char)
+                sys.stdout.flush()
             time.sleep(1)
             mainui()
         if authvalue == '0':
