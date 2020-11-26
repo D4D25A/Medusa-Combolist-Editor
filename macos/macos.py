@@ -1629,6 +1629,10 @@ def mainui():
     if preference.upper() == "2":
         remotecomboedits()
     else:
+        pass
+    if preference.upper() == "X":
+        sys.exit(0)
+    else:
         print('Please enter a correct input.')
         time.sleep(1)
         mainui()
