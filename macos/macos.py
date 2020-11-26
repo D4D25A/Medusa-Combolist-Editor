@@ -1589,7 +1589,7 @@ def remotecomboedits():
 
 
 def enablemusic():
-    if musicerror = True:
+    if musicerror == True:
         print("Music Module Error!")
         time.sleep(1)
         mainui()
@@ -1600,7 +1600,7 @@ def enablemusic():
         mainui()
 
 def disablemusic():
-    if musicerror = True:
+    if musicerror == True:
         print("Music Module Error!")
         time.sleep(1)
         mainui()
