@@ -151,9 +151,8 @@ try:
     medusamusic=mixer.Sound(music)
     medusamusic.set_volume(0.15)
     medusamusic.play(-1)
-    musicerror = 0
 except pygame.error:
-    musicerror = 1
+    musicerror = True
     pass
 
 error = """
@@ -1543,24 +1542,24 @@ def remotecomboedits():
 
 
 def enablemusic():
-    if musicerror == '0':
-        mixer.unpause()
-        print("Music Enabled.")
+    if musicerror = True:
+        print("Music Module Error!")
         time.sleep(1)
         mainui()
-    if musicerror == '1':
-        print("Music Module Error!")
+    else:
+        mixer.unpause()
+        print('Music Enabled.')
         time.sleep(1)
         mainui()
 
 def disablemusic():
-    if musicerror == '0':
-        mixer.pause()
-        print("Music Disabled.")
+    if musicerror = True:
+        print("Music Module Error!")
         time.sleep(1)
         mainui()
-    if musicerror == '1':
-        print("Music Module Error!")
+    else:
+        mixer.pause()
+        print("Music Disabled.")
         time.sleep(1)
         mainui()
 
@@ -1580,12 +1579,12 @@ def mainui():
 
     print(f"\n{bcolors.OKGREEN}What would you like to do today? {bcolors.ENDC}"); preference = (getch())
 
-    if preference.lower() == "E":
+    if preference.upper() == "E":
         enablemusic()
     else:
         pass
 
-    if preference.lower() == "D":
+    if preference.upper() == "D":
         disablemusic()
     else:
         pass

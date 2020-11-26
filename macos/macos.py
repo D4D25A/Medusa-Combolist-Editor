@@ -145,19 +145,19 @@ if not os.path.exists(user_profile):
 
 with open(stamp,'w') as output:
   output.write("Medusa was here.")
-
+os.system('cls' if os.name == 'nt' else 'clear')
+print(f'Downloading {bcolors.OKGREEN}dependencies{bcolors.ENDC}...')
 mp3file = requests.get("https://medusa.tools/music/music.wav") # remote medusa music files
 with open(music,'wb') as output:
   output.write(mp3file.content)
-
+print(f'Downloaded {bcolors.OKGREEN}dependencies{bcolors.ENDC}...')
 try: 
     mixer.init()
     medusamusic=mixer.Sound(music)
     medusamusic.set_volume(0.15)
     medusamusic.play(-1)
-    musicerror = 0
 except pygame.error:
-    musicerror = 1
+    musicerror = True
     pass
 
 error = """
@@ -1589,24 +1589,24 @@ def remotecomboedits():
 
 
 def enablemusic():
-    if musicerror == '0':
-        mixer.unpause()
-        print("Music Enabled.")
+    if musicerror = True:
+        print("Music Module Error!")
         time.sleep(1)
         mainui()
-    if musicerror == '1':
-        print("Music Module Error!")
+    else:
+        mixer.unpause()
+        print('Music Enabled.')
         time.sleep(1)
         mainui()
 
 def disablemusic():
-    if musicerror == '0':
-        mixer.pause()
-        print("Music Disabled.")
+    if musicerror = True:
+        print("Music Module Error!")
         time.sleep(1)
         mainui()
-    if musicerror == '1':
-        print("Music Module Error!")
+    else:
+        mixer.pause()
+        print("Music Disabled.")
         time.sleep(1)
         mainui()
 
