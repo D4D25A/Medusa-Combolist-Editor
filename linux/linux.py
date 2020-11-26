@@ -1580,12 +1580,12 @@ def mainui():
 
     print(f"\n{bcolors.OKGREEN}What would you like to do today? {bcolors.ENDC}"); preference = (getch())
 
-    if preference.upper() == "E":
+    if preference.lower() == "E":
         enablemusic()
     else:
         pass
 
-    if preference.upper() == "D":
+    if preference.lower() == "D":
         disablemusic()
     else:
         pass
