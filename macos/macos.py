@@ -1443,7 +1443,7 @@ def remotecomboedits():
     try: 
         log = (f'\n{bcolors.CYAN}[{bcolors.ENDC}'+(strftime("%Y-%m-%d %H:%M:%S", gmtime()))+f'{bcolors.CYAN}] {bcolors.ENDC}')
         HOST = '127.0.0.1'  # The server's hostname or IP address - currently set to medusa's listener running on localhost
-        PORT = 56420        # The port used by the server - currently set to medusa's listener running on localhost
+        PORT = 34280        # The port used by the server - currently set to medusa's listener running on localhost
         os.system('cls' if os.name == 'nt' else 'clear')
         print(centered)
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
