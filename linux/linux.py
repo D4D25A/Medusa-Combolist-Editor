@@ -144,11 +144,13 @@ with open(stamp,'w') as output:
 mp3file = requests.get("https://medusa.tools/music/music.wav") # remote medusa music files
 with open(music,'wb') as output:
   output.write(mp3file.content)
-
-mixer.init()
-medusamusic=mixer.Sound(music)
-medusamusic.set_volume(0.15)
-medusamusic.play(-1)
+try: 
+    mixer.init()
+    medusamusic=mixer.Sound(music)
+    medusamusic.set_volume(0.15)
+    medusamusic.play(-1)
+except pygame.error: 
+    pass
 
 error = """
                          ______
