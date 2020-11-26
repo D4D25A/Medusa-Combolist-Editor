@@ -141,6 +141,7 @@ try:
     medusamusic=mixer.Sound(music)
     medusamusic.set_volume(0.15)
     medusamusic.play(-1)
+    musicerror = False
 except pygame.error:
     musicerror = True
     pass
@@ -1574,7 +1575,7 @@ def remotecomboedits():
 
 
 def enablemusic():
-    if musicerror == True:
+    if(musicerror):
         print("Music Module Error!")
         time.sleep(1)
         mainui()
@@ -1585,7 +1586,7 @@ def enablemusic():
         mainui()
 
 def disablemusic():
-    if musicerror == True:
+    if(musicerror):
         print("Music Module Error!")
         time.sleep(1)
         mainui()
