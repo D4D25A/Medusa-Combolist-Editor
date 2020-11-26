@@ -1,4 +1,4 @@
-import sys,time,os,send,random,requests,chardet,subprocess,shutil,psutil,ctypes,fileinput,textwrap,itertools,socket,re,tkinter,threading,msvcrt
+import sys,time,os,send,random,requests,chardet,subprocess,shutil,psutil,ctypes,fileinput,textwrap,itertools,socket,re,tkinter,threading,msvcrt,pygame
 from time import gmtime, strftime
 from ast import literal_eval
 from datetime import datetime
