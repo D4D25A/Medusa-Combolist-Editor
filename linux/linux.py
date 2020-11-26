@@ -74,7 +74,6 @@ def securityrun():
     else:
         pass
 
-securityrun()
 os.system("printf '\e[9;1t'")
 
 localhwid = 'test' # set to 'dev' to allow for seamless development
@@ -103,37 +102,12 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 securitycheck = False
-def securityloader():
-    for c in itertools.cycle(['|', '/', '-', '\\']):
-        if securitycheck:
-            break
-        sys.stdout.write('\rSecurity Checks... '+c)
-        sys.stdout.flush()
-        time.sleep(0.1)
-
-t = threading.Thread(target=securityloader)
-t.start()
-
-time.sleep(2)
+print(f'\rSecurity Checks...')
+securityrun()
 securitycheck = True
 print(f'\rSecurity Checks... {bcolors.OKGREEN}DONE{bcolors.ENDC}')
 time.sleep(2)
 os.system('cls' if os.name == 'nt' else 'clear')
-
-loaddone = False
-def animateload():
-    for c in itertools.cycle(['|', '/', '-', '\\']):
-        if loaddone:
-            break
-        sys.stdout.write('\rLoading '+c)
-        sys.stdout.flush()
-        time.sleep(0.1)
-
-t = threading.Thread(target=animateload)
-t.start()
-
-time.sleep(5)
-loaddone = True
 
 if not os.path.exists(user_profile):
     os.makedirs(user_profile)
@@ -149,7 +123,9 @@ try:
     medusamusic=mixer.Sound(music)
     medusamusic.set_volume(0.15)
     medusamusic.play(-1)
+    musicerror = 0
 except pygame.error: 
+    musicerror = 1
     pass
 
 error = """
@@ -1539,16 +1515,26 @@ def remotecomboedits():
 
 
 def enablemusic():
-    mixer.unpause()
-    print("Music Enabled.")
-    time.sleep(1)
-    mainui()
+    if musicerror == '0':
+        mixer.unpause()
+        print("Music Enabled.")
+        time.sleep(1)
+        mainui()
+    if musicerror == '1':
+        print("Music Module Error!")
+        time.sleep(1)
+        mainui
 
 def disablemusic():
-    mixer.pause()
-    print("Music Disabled.")
-    time.sleep(1)
-    mainui()
+    if musicerror == '0':
+        mixer.pause()
+        print("Music Disabled.")
+        time.sleep(1)
+        mainui()
+    if musicerror == '1':
+        print("Music Module Error!")
+        time.sleep(1)
+        mainui
 
 def mainui():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -1639,25 +1625,16 @@ while loop:
         authvalue = s.recv(128).decode() # receives authentication reponse from medusa authentication server
         if authvalue =='1': # verifies medusa authentication response as successful
             suc = (f"\n{bcolors.OKGREEN}Authentication successful...{bcolors.ENDC}")
-            for char in suc:
-                time.sleep(0.010)
-                sys.stdout.write(char)
-                sys.stdout.flush()
+            print(suc)
             load = ("\nLoading...")
-            for char in load:
-                time.sleep(0.010)
-                sys.stdout.write(char)
-                sys.stdout.flush()
+            print(load)
             loop = False
             time.sleep(1)
             os.system('cls' if os.name == 'nt' else 'clear')
             print(centered)
             sys.stdout.write(f"\x1b]2;Medusa - Made by kyle-import | Log-in successful. \x07")
             welcome = (f"Welcome back!\n{bcolors.ENDC}")
-            for char in welcome:
-                time.sleep(0.010)
-                sys.stdout.write(char)
-                sys.stdout.flush()
+            print(welcome)
             time.sleep(1)
             mainui()
         if authvalue == '0':
