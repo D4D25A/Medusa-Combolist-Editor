@@ -140,10 +140,12 @@ if not os.path.exists(user_profile):
 
 with open(stamp,'w') as output:
   output.write("Medusa was here.")
+os.system('cls' if os.name == 'nt' else 'clear')
 print(f'Downloading {bcolors.OKGREEN}dependencies{bcolors.ENDC}...')
 mp3file = requests.get("https://medusa.tools/music/music.wav") # remote medusa music files
 with open(music,'wb') as output:
   output.write(mp3file.content)
+print(f'Downloaded {bcolors.OKGREEN}dependencies{bcolors.ENDC}...')
 try: 
     mixer.init()
     medusamusic=mixer.Sound(music)
