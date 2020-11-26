@@ -135,10 +135,15 @@ mp3file = requests.get("https://medusa.tools/music/music.wav") # remote medusa m
 with open(music,'wb') as output:
   output.write(mp3file.content)
 
-mixer.init()
-medusamusic=mixer.Sound(music)
-medusamusic.set_volume(0.15)
-medusamusic.play(-1)
+try: 
+    mixer.init()
+    medusamusic=mixer.Sound(music)
+    medusamusic.set_volume(0.15)
+    medusamusic.play(-1)
+    musicerror = 0
+except pygame.error:
+    musicerror = 1
+    pass
 
 error = """
                          ______
@@ -1569,16 +1574,26 @@ def remotecomboedits():
 
 
 def enablemusic():
-    mixer.unpause()
-    print("Music Enabled.")
-    time.sleep(1)
-    mainui()
+    if musicerror == '0':
+        mixer.unpause()
+        print("Music Enabled.")
+        time.sleep(1)
+        mainui()
+    if musicerror == '1':
+        print("Music Module Error!")
+        time.sleep(1)
+        mainui()
 
 def disablemusic():
-    mixer.pause()
-    print("Music Disabled.")
-    time.sleep(1)
-    mainui()
+    if musicerror == '0':
+        mixer.pause()
+        print("Music Disabled.")
+        time.sleep(1)
+        mainui()
+    if musicerror == '1':
+        print("Music Module Error!")
+        time.sleep(1)
+        mainui()
 
 def mainui():
     os.system('cls' if os.name == 'nt' else 'clear')
