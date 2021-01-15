@@ -1432,10 +1432,14 @@ def localcomboedits():
        sys.exit(0)
 
 def remotecomboedits():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print(centered)
+    remoteip = input(f'\n{bcolors.CYAN}Enter server {bcolors.OKGREEN}IP address{bcolors.CYAN}: {bcolors.ENDC}')
+    remoteport = input(f'\n{bcolors.CYAN}Enter server {bcolors.OKGREEN}port{bcolors.CYAN}: {bcolors.ENDC}')
     try: 
         log = (f'\n{bcolors.CYAN}[{bcolors.ENDC}'+(strftime("%Y-%m-%d %H:%M:%S", gmtime()))+f'{bcolors.CYAN}] {bcolors.ENDC}')
-        HOST = '127.0.0.1'  # The server's hostname or IP address - currently set to medusa's listener running on localhost
-        PORT = 34280        # The port used by the server - currently set to medusa's listener running on localhost
+        HOST = remoteip # The server's hostname or IP address - currently set to medusa's listener running on localhost
+        PORT = int(remoteport)        # The port used by the server - currently set to medusa's listener running on localhost
         os.system('cls' if os.name == 'nt' else 'clear')
         print(centered)
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -1554,6 +1558,22 @@ def remotecomboedits():
                 else:
                     pass
     except ConnectionRefusedError:
+        print(f'{bcolors.UNDERLINE}{bcolors.FAIL}Connection failed.{bcolors.ENDC}')
+        print(f"\n{bcolors.UNDERLINE}Navigation Options:{bcolors.ENDC}")
+        print(f"{bcolors.CYAN}[{bcolors.ENDC}B{bcolors.CYAN}]{bcolors.ENDC} Back to Local Combolist Edit Options")
+        print(f"{bcolors.CYAN}[{bcolors.ENDC}M{bcolors.CYAN}]{bcolors.ENDC} Back to Main Menu")
+        print(f"{bcolors.OKGREEN}What would you like to do today? {bcolors.ENDC}"); emailtouserpreference = (getch())
+
+        if emailtouserpreference.upper() == "M":
+            mainui()
+        else:
+            pass
+
+        if emailtouserpreference.upper() == "B":
+            localcomboedits()
+        else:
+            pass
+    except OSError:
         print(f'{bcolors.UNDERLINE}{bcolors.FAIL}Connection failed.{bcolors.ENDC}')
         print(f"\n{bcolors.UNDERLINE}Navigation Options:{bcolors.ENDC}")
         print(f"{bcolors.CYAN}[{bcolors.ENDC}B{bcolors.CYAN}]{bcolors.ENDC} Back to Local Combolist Edit Options")
