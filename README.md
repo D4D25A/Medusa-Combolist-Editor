@@ -15,6 +15,6 @@ Run ```pip3 install -r ./server/auth/requirements.txt```
 then ```python3 ./server/auth/auth.py```  
 
 **Medusa Client**  
-Run ```pip3 install -r ./windows/requirements.txt``` or ```pip3 install -r ./macos/requirements.txt``` or ```pip3 install -r ./linux/requirements.txt``` 
+Run ```pip3 install -r ./windows/requirements.txt``` or ```pip3 install -r ./macos/requirements.txt```
   
-then ```python3 ./windows/windows.py``` or ```python3 ./macos/macos.py``` or ```pip3 install -r ./linux/linux.py```  
+then ```python3 ./windows/windows.py``` or ```python3 ./macos/macos.py```
