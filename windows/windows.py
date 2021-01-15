@@ -77,8 +77,6 @@ home = os.path.expanduser('~')
 user_profile = home+'/Medusa'
 stamp = user_profile+'/footprint.txt'
 settings = user_profile+'/settings.txt'
-music = user_profile+'/music.wav'
-tkicon =  user_profile+'/icon.ico'
 
 class bcolors:
     HEADER = '\033[95m'
@@ -131,14 +129,9 @@ if not os.path.exists(user_profile):
 with open(stamp,'w') as output:
   output.write("Medusa was here.")
 os.system('cls' if os.name == 'nt' else 'clear')
-print(f'Downloading {bcolors.OKGREEN}dependencies{bcolors.ENDC}...')
-mp3file = requests.get("https://medusa.tools/music/music.wav") # remote medusa music files
-with open(music,'wb') as output:
-  output.write(mp3file.content)
-print(f'Downloaded {bcolors.OKGREEN}dependencies{bcolors.ENDC}...')
 try: 
     mixer.init()
-    medusamusic=mixer.Sound(music)
+    medusamusic=mixer.Sound('./music.wav')
     medusamusic.set_volume(0.15)
     medusamusic.play(-1)
     musicerror = False
@@ -179,11 +172,34 @@ def localcomboedits():
             PORT = 56420        # The port used by the server - currently set to medusa's listener running on localhost
             s.connect((HOST, PORT)) # connects to medusa authentication server
             s.send((localhwid.encode())) # sends hwid to medusa authentication server
+            time.sleep(1)
+            s.send((version.encode())) # sends version id to medusa server
             authvalue = s.recv(128).decode() # receives authentication reponse from medusa authentication server
-            if authvalue == '1': # verifies medusa authentication response as successful
-                logged = (f"Successfully authenticated client.\n{bcolors.ENDC}")
-            if authvalue == '0':
+            if authvalue == '3':
                 os.system('cls' if os.name == 'nt' else 'clear')
+                loop = False
+                print(error)
+                print("\n")
+                print("\n")
+                print("\n")
+                print("Failed to authenticate, and your client is outdated, please update your Medusa client and try again..")
+                input("\nPress enter to close...")
+                sys.exit(0)
+            if authvalue == '2':
+                os.system('cls' if os.name == 'nt' else 'clear')
+                loop = False
+                print(error)
+                print("\n")
+                print("\n")
+                print("\n")
+                print("Login successful, but your client is outdated, please update your Medusa client and try again..")
+                input("\nPress enter to close...")
+                sys.exit(0)
+            if authvalue =='1': # verifies medusa authentication response as successful
+                logged = (f"Successfully authenticated client.\n{bcolors.ENDC}")
+            if authvalue == '0': #
+                os.system('cls' if os.name == 'nt' else 'clear')
+                loop = False
                 print(error)
                 print("\n")
                 print("\n")
@@ -239,25 +255,22 @@ def localcomboedits():
                     filetypes=['*.txt']
                     default='*.txt'
                     securityrun()
-                    windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
-                    with open(tkicon,'wb') as output:
-                        output.write(windowicon.content)
-                    tk.iconbitmap(tkicon)
+                    
                     combofullpath = filedialog.askopenfilename(title = "Select a combolist file.",filetypes = (("Combolist File","*.txt"),("All files","*.*")))
                     try:
                         combopath = os.path.dirname(combofullpath)
                         comboname = os.path.basename(combopath)
                         dumpcombopath = ((os.path.splitext(combofullpath)[0])+'_dump.txt')
                         newcombopath = ((os.path.splitext(combofullpath)[0])+'_editted.txt')
-                        combobytes = open(combofullpath, "rb").read(); comboencoding = chardet.detect(combobytes).get('encoding')
-                        combolinesno = (sum(1 for line in open(combofullpath, encoding=comboencoding)))
+                        
+                        combolinesno = (sum(1 for line in open(combofullpath,"rb")))
                     except FileNotFoundError:
                         emailpassuhq()
                     print(f'{bcolors.OKGREEN}'+str(combolinesno)+f' {bcolors.CYAN}lines in combolist{bcolors.ENDC}')
-                    with open(combofullpath,"r") as q:
+                    with open(combofullpath,"rb") as q:
                         startedit = time.time()
                         print(f'\n{bcolors.OKGREEN}Reading {bcolors.CYAN}combolist...{bcolors.ENDC}')
-                        texts = q.read()
+                        texts = q.read().decode(errors='replace')
                         comboline = texts.split("\n")
                         print(f'\n{bcolors.OKGREEN}Making {bcolors.CYAN}[{bcolors.WARNING}EMAIL{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] combolist UHQ...{bcolors.ENDC}')
                         combo = []
@@ -483,7 +496,7 @@ def localcomboedits():
 
                         timetakenedit = endedit - startedit
                         timetakencleanshuffle = endcleanshuffle - startcleanshuffle
-                        newcombolinesno = (sum(1 for line in open(newcombopath)))
+                        newcombolinesno = (sum(1 for line in open(newcombopath,"rb")))
                         print(f'{bcolors.OKGREEN}\nSuccess!{bcolors.CYAN} made a [{bcolors.WARNING}EMAIL{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] {bcolors.OKGREEN}'+str(combolinesno)+f'{bcolors.CYAN} lines combo into a {bcolors.CYAN}[{bcolors.WARNING}EMAIL{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] {bcolors.OKGREEN}'+str(newcombolinesno)+f'{bcolors.CYAN} lines UHQ combo.{bcolors.ENDC}\n')
                         print(f'{bcolors.OKGREEN}Editting{bcolors.CYAN} the combolist took {bcolors.OKGREEN}'+str(timetakenedit)+f' seconds.{bcolors.ENDC}')
                         print(f'{bcolors.OKGREEN}Cleaning & shuffling{bcolors.CYAN} the combolist took{bcolors.OKGREEN} '+str(timetakencleanshuffle)+f' seconds.{bcolors.ENDC}')
@@ -570,25 +583,21 @@ def localcomboedits():
                     filetypes=['*.txt']
                     default='*.txt'
                     securityrun()
-                    windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
-                    with open(tkicon,'wb') as output:
-                        output.write(windowicon.content)
-                    tk.iconbitmap(tkicon)
+                    
                     combofullpath = filedialog.askopenfilename(title = "Select a combolist file.",filetypes = (("Combolist File","*.txt"),("All files","*.*")))
                     try:
                         combopath = os.path.dirname(combofullpath)
                         comboname = os.path.basename(combopath)
                         dumpcombopath = ((os.path.splitext(combofullpath)[0])+'_dump.txt')
                         newcombopath = ((os.path.splitext(combofullpath)[0])+'_editted.txt')
-                        combobytes = open(combofullpath, "rb").read(); comboencoding = chardet.detect(combobytes).get('encoding')
-                        combolinesno = (sum(1 for line in open(combofullpath, encoding=comboencoding)))
+                        combolinesno = (sum(1 for line in open(combofullpath,"rb")))
                     except FileNotFoundError:
                         emailtouser()
                     print(f'{bcolors.OKGREEN}'+str(combolinesno)+f' {bcolors.CYAN}lines in combolist{bcolors.ENDC}')
-                    with open(combofullpath,"r") as q:
+                    with open(combofullpath,"rb") as q:
                         startedit = time.time()
                         print(f'\n{bcolors.OKGREEN}Reading {bcolors.CYAN}combolist...{bcolors.ENDC}')
-                        texts = q.read()
+                        texts = q.read().decode(errors='replace')
                         comboline = texts.split("\n")
                         print(f'\n{bcolors.OKGREEN}Exchanging {bcolors.CYAN}combolist from {bcolors.CYAN}[{bcolors.WARNING}EMAIL{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] {bcolors.CYAN}to [{bcolors.WARNING}USER{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}]...{bcolors.ENDC}')
                         combo = []
@@ -616,7 +625,7 @@ def localcomboedits():
 
                         timetakenedit = endedit - startedit
                         timetakencleanshuffle = endcleanshuffle - startcleanshuffle
-                        newcombolinesno = (sum(1 for line in open(newcombopath)))
+                        newcombolinesno = (sum(1 for line in open(newcombopath,"rb")))
                         print(f'{bcolors.OKGREEN}\nSuccess!{bcolors.CYAN} editted a [{bcolors.WARNING}EMAIL{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] {bcolors.OKGREEN}'+str(combolinesno)+f'{bcolors.CYAN} lines combo into a {bcolors.CYAN}[{bcolors.WARNING}USER{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] {bcolors.OKGREEN}'+str(newcombolinesno)+f'{bcolors.CYAN} lines combo.{bcolors.ENDC}\n')
                         print(f'{bcolors.OKGREEN}Editting{bcolors.CYAN} the combolist took {bcolors.OKGREEN}'+str(timetakenedit)+f' seconds.{bcolors.ENDC}')
                         print(f'{bcolors.OKGREEN}Cleaning & shuffling{bcolors.CYAN} the combolist took{bcolors.OKGREEN} '+str(timetakencleanshuffle)+f' seconds.{bcolors.ENDC}')
@@ -666,24 +675,19 @@ def localcomboedits():
                     filetypes=['*.txt']
                     default='*.txt'
                     securityrun()
-                    windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
-                    with open(tkicon,'wb') as output:
-                        output.write(windowicon.content)
-
-
-                    tk.iconbitmap(tkicon)
+                    
                     combofullpath = filedialog.askopenfilename(title = "Select a combolist file.",filetypes = (("Combolist File","*.txt"),("All files","*.*")))
                     try:
                         combopath = os.path.dirname(combofullpath)
                         comboname = os.path.basename(combopath)
                         dumpcombopath = ((os.path.splitext(combofullpath)[0])+'_dump.txt')
                         newcombopath = ((os.path.splitext(combofullpath)[0])+'_editted.txt')
-                        combobytes = open(combofullpath, "rb").read(); comboencoding = chardet.detect(combobytes).get('encoding')
-                        combolinesno = (sum(1 for line in open(combofullpath, encoding=comboencoding)))
+                        
+                        combolinesno = (sum(1 for line in open(combofullpath,"rb")))
                     except FileNotFoundError:
                         addemailstoemail()
                     print(f'{bcolors.OKGREEN}'+str(combolinesno)+f' {bcolors.CYAN}lines in combolist{bcolors.ENDC}')
-                    with open(combofullpath,"r") as f:
+                    with open(combofullpath,"rb") as f:
                         startedit = time.time()
                         print(f'\n{bcolors.OKGREEN}Reading {bcolors.CYAN}combolist...{bcolors.ENDC}')
                         texts = f.read()
@@ -726,7 +730,7 @@ def localcomboedits():
 
                         timetakenedit = endedit - startedit
                         timetakencleanshuffle = endcleanshuffle - startcleanshuffle
-                        newcombolinesno = (sum(1 for line in open(newcombopath)))
+                        newcombolinesno = (sum(1 for line in open(newcombopath,"rb")))
                         print(f'{bcolors.OKGREEN}\nSuccess!{bcolors.CYAN} added multiple email providers to a [{bcolors.WARNING}EMAIL{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] {bcolors.OKGREEN}'+str(combolinesno)+f'{bcolors.CYAN} lines combo, turning it into a {bcolors.CYAN}[{bcolors.WARNING}EMAIL{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] {bcolors.OKGREEN}'+str(newcombolinesno)+f'{bcolors.CYAN} lines combo.{bcolors.ENDC}\n')
                         print(f'{bcolors.OKGREEN}Editting{bcolors.CYAN} the combolist took {bcolors.OKGREEN}'+str(timetakenedit)+f' seconds.{bcolors.ENDC}')
                         print(f'{bcolors.OKGREEN}Cleaning & shuffling{bcolors.CYAN} the combolist took{bcolors.OKGREEN} '+str(timetakencleanshuffle)+f' seconds.{bcolors.ENDC}')
@@ -777,25 +781,22 @@ def localcomboedits():
                     default='*.txt'
 
                     securityrun()
-                    windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
-                    with open(tkicon,'wb') as output:
-                        output.write(windowicon.content)
-                    tk.iconbitmap(tkicon)
+                    
                     combofullpath = filedialog.askopenfilename(title = "Select a combolist file.",filetypes = (("Combolist File","*.txt"),("All files","*.*")))
                     try:
                         combopath = os.path.dirname(combofullpath)
                         comboname = os.path.basename(combopath)
                         dumpcombopath = ((os.path.splitext(combofullpath)[0])+'_dump.txt')
                         newcombopath = ((os.path.splitext(combofullpath)[0])+'_editted.txt')
-                        combobytes = open(combofullpath, "rb").read(); comboencoding = chardet.detect(combobytes).get('encoding')
-                        combolinesno = (sum(1 for line in open(combofullpath, encoding=comboencoding)))
+                        
+                        combolinesno = (sum(1 for line in open(combofullpath,"rb")))
                     except FileNotFoundError:
                         usertoemail()
                     print(f'{bcolors.OKGREEN}'+str(combolinesno)+f' {bcolors.CYAN}lines in combolist{bcolors.ENDC}')
-                    with open(combofullpath,"r") as q:
+                    with open(combofullpath,"rb") as q:
                         startedit = time.time()
                         print(f'\n{bcolors.OKGREEN}Reading {bcolors.CYAN}combolist...{bcolors.ENDC}')
-                        texts = q.read()
+                        texts = q.read().decode(errors='replace')
                         comboline = texts.split("\n")
                         print(f'\n{bcolors.OKGREEN}Exchanging {bcolors.CYAN}combolist from {bcolors.CYAN}[{bcolors.WARNING}USER{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] {bcolors.CYAN}to [{bcolors.WARNING}EMAIL{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}]...{bcolors.ENDC}')
                         combo = []
@@ -835,7 +836,7 @@ def localcomboedits():
 
                         timetakenedit = endedit - startedit
                         timetakencleanshuffle = endcleanshuffle - startcleanshuffle
-                        newcombolinesno = (sum(1 for line in open(newcombopath)))
+                        newcombolinesno = (sum(1 for line in open(newcombopath,"rb")))
                         print(f'{bcolors.OKGREEN}\nSuccess!{bcolors.CYAN} editted a [{bcolors.WARNING}USER{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] {bcolors.OKGREEN}'+str(combolinesno)+f'{bcolors.CYAN} lines combo into a {bcolors.CYAN}[{bcolors.WARNING}EMAIL{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] {bcolors.OKGREEN}'+str(newcombolinesno)+f'{bcolors.CYAN} lines combo.{bcolors.ENDC}\n')
                         print(f'{bcolors.OKGREEN}Editting{bcolors.CYAN} the combolist took {bcolors.OKGREEN}'+str(timetakenedit)+f' seconds.{bcolors.ENDC}')
                         print(f'{bcolors.OKGREEN}Cleaning & shuffling{bcolors.CYAN} the combolist took{bcolors.OKGREEN} '+str(timetakencleanshuffle)+f' seconds.{bcolors.ENDC}')
@@ -886,25 +887,22 @@ def localcomboedits():
                     filetypes=['*.txt']
                     default='*.txt'
                     securityrun()
-                    windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
-                    with open(tkicon,'wb') as output:
-                        output.write(windowicon.content)
-                    tk.iconbitmap(tkicon)
+                    
                     combofullpath = filedialog.askopenfilename(title = "Select a combolist file.",filetypes = (("Combolist File","*.txt"),("All files","*.*")))
                     try:
                         combopath = os.path.dirname(combofullpath)
                         comboname = os.path.basename(combopath)
                         dumpcombopath = ((os.path.splitext(combofullpath)[0])+'_dump.txt')
                         newcombopath = ((os.path.splitext(combofullpath)[0])+'_editted.txt')
-                        combobytes = open(combofullpath, "rb").read(); comboencoding = chardet.detect(combobytes).get('encoding')
-                        combolinesno = (sum(1 for line in open(combofullpath, encoding=comboencoding)))
+                        
+                        combolinesno = (sum(1 for line in open(combofullpath,"rb")))
                     except FileNotFoundError:
                         removespecialchars()
                     print(f'{bcolors.OKGREEN}'+str(combolinesno)+f' {bcolors.CYAN}lines in combolist{bcolors.ENDC}')
-                    with open(combofullpath,"r") as q:
+                    with open(combofullpath,"rb") as q:
                         startedit = time.time()
                         print(f'\n{bcolors.OKGREEN}Reading {bcolors.CYAN}combolist...{bcolors.ENDC}')
-                        texts = q.read()
+                        texts = q.read().decode(errors='replace')
                         comboline = texts.split("\n")
                         print(f'\n{bcolors.OKGREEN}Removing {bcolors.CYAN}any special characters within passwords inside of this combolist... {bcolors.ENDC}')
                         combo = []
@@ -932,7 +930,7 @@ def localcomboedits():
 
                         timetakenedit = endedit - startedit
                         timetakencleanshuffle = endcleanshuffle - startcleanshuffle
-                        newcombolinesno = (sum(1 for line in open(newcombopath)))
+                        newcombolinesno = (sum(1 for line in open(newcombopath,"rb")))
                         print(f'{bcolors.OKGREEN}\nSuccess!{bcolors.CYAN} removed any special characters within passwords inside of the {bcolors.OKGREEN}'+str(combolinesno)+f'{bcolors.CYAN} lines combo, turning it into a {bcolors.OKGREEN}'+str(newcombolinesno)+f'{bcolors.CYAN} lines combo.{bcolors.ENDC}\n')
                         print(f'{bcolors.OKGREEN}Editting{bcolors.CYAN} the combolist took {bcolors.OKGREEN}'+str(timetakenedit)+f' seconds.{bcolors.ENDC}')
                         print(f'{bcolors.OKGREEN}Cleaning & shuffling{bcolors.CYAN} the combolist took{bcolors.OKGREEN} '+str(timetakencleanshuffle)+f' seconds.{bcolors.ENDC}')
@@ -983,25 +981,22 @@ def localcomboedits():
                     filetypes=['*.txt']
                     default='*.txt'
                     securityrun()
-                    windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
-                    with open(tkicon,'wb') as output:
-                        output.write(windowicon.content)
-                    tk.iconbitmap(tkicon)
+                    
                     combofullpath = filedialog.askopenfilename(title = "Select a combolist file.",filetypes = (("Combolist File","*.txt"),("All files","*.*")))
                     try:
                         combopath = os.path.dirname(combofullpath)
                         comboname = os.path.basename(combopath)
                         dumpcombopath = ((os.path.splitext(combofullpath)[0])+'_dump.txt')
                         newcombopath = ((os.path.splitext(combofullpath)[0])+'_editted.txt')
-                        combobytes = open(combofullpath, "rb").read(); comboencoding = chardet.detect(combobytes).get('encoding')
-                        combolinesno = (sum(1 for line in open(combofullpath, encoding=comboencoding)))
+                        
+                        combolinesno = (sum(1 for line in open(combofullpath,"rb")))
                     except FileNotFoundError:
                         nonnumericuser()
                     print(f'{bcolors.OKGREEN}'+str(combolinesno)+f' {bcolors.CYAN}lines in combolist{bcolors.ENDC}')
-                    with open(combofullpath,"r") as q:
+                    with open(combofullpath,"rb") as q:
                         startedit = time.time()
                         print(f'\n{bcolors.OKGREEN}Reading {bcolors.CYAN}combolist...{bcolors.ENDC}')
-                        texts = q.read()
+                        texts = q.read().decode(errors='replace')
                         comboline = texts.split("\n")
                         print(f'\n{bcolors.OKGREEN}Exchanging {bcolors.CYAN}non-numeric {bcolors.WARNING}usernames{bcolors.CYAN} to passwords within this [{bcolors.WARNING}USER{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] combolist...{bcolors.ENDC}')
                         combo = []
@@ -1029,7 +1024,7 @@ def localcomboedits():
 
                         timetakenedit = endedit - startedit
                         timetakencleanshuffle = endcleanshuffle - startcleanshuffle
-                        newcombolinesno = (sum(1 for line in open(newcombopath)))
+                        newcombolinesno = (sum(1 for line in open(newcombopath,"rb")))
                         print(f'{bcolors.OKGREEN}\nSuccess!{bcolors.CYAN} exchanged {bcolors.CYAN}non-numeric {bcolors.WARNING}usernames{bcolors.CYAN} to passwords within this [{bcolors.WARNING}USER{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] {bcolors.OKGREEN}'+str(combolinesno)+f'{bcolors.CYAN} lines combo, turning it into a {bcolors.OKGREEN}'+str(newcombolinesno)+f'{bcolors.CYAN} lines combo.{bcolors.ENDC}\n')
                         print(f'{bcolors.OKGREEN}Editting{bcolors.CYAN} the combolist took {bcolors.OKGREEN}'+str(timetakenedit)+f' seconds.{bcolors.ENDC}')
                         print(f'{bcolors.OKGREEN}Cleaning & shuffling{bcolors.CYAN} the combolist took{bcolors.OKGREEN} '+str(timetakencleanshuffle)+f' seconds.{bcolors.ENDC}')
@@ -1080,25 +1075,22 @@ def localcomboedits():
                     filetypes=['*.txt']
                     default='*.txt'
                     securityrun()
-                    windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
-                    with open(tkicon,'wb') as output:
-                        output.write(windowicon.content)
-                    tk.iconbitmap(tkicon)
+                    
                     combofullpath = filedialog.askopenfilename(title = "Select a combolist file.",filetypes = (("Combolist File","*.txt"),("All files","*.*")))
                     try:
                         combopath = os.path.dirname(combofullpath)
                         comboname = os.path.basename(combopath)
                         dumpcombopath = ((os.path.splitext(combofullpath)[0])+'_dump.txt')
                         newcombopath = ((os.path.splitext(combofullpath)[0])+'_editted.txt')
-                        combobytes = open(combofullpath, "rb").read(); comboencoding = chardet.detect(combobytes).get('encoding')
-                        combolinesno = (sum(1 for line in open(combofullpath, encoding=comboencoding)))
+                        
+                        combolinesno = (sum(1 for line in open(combofullpath,"rb")))
                     except FileNotFoundError:
                         nonnumericemail()
                     print(f'{bcolors.OKGREEN}'+str(combolinesno)+f' {bcolors.CYAN}lines in combolist{bcolors.ENDC}')
-                    with open(combofullpath,"r") as q:
+                    with open(combofullpath,"rb") as q:
                         startedit = time.time()
                         print(f'\n{bcolors.OKGREEN}Reading {bcolors.CYAN}combolist...{bcolors.ENDC}')
-                        texts = q.read()
+                        texts = q.read().decode(errors='replace')
                         comboline = texts.split("\n")
                         print(f'\n{bcolors.OKGREEN}Exchanging {bcolors.CYAN}non-numeric {bcolors.WARNING}email usernames{bcolors.CYAN} to passwords within this [{bcolors.WARNING}EMAIL{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] combolist...{bcolors.ENDC}')
                         combo = []
@@ -1127,7 +1119,7 @@ def localcomboedits():
 
                         timetakenedit = endedit - startedit
                         timetakencleanshuffle = endcleanshuffle - startcleanshuffle
-                        newcombolinesno = (sum(1 for line in open(newcombopath)))
+                        newcombolinesno = (sum(1 for line in open(newcombopath,"rb")))
                         print(f'{bcolors.OKGREEN}\nSuccess!{bcolors.CYAN} exchanged {bcolors.CYAN}non-numeric {bcolors.WARNING}email usernames{bcolors.CYAN} to passwords within this [{bcolors.WARNING}EMAIL{bcolors.CYAN}:{bcolors.WARNING}PASS{bcolors.CYAN}] {bcolors.OKGREEN}'+str(combolinesno)+f'{bcolors.CYAN} lines combo, turning it into a {bcolors.OKGREEN}'+str(newcombolinesno)+f'{bcolors.CYAN} lines combo.{bcolors.ENDC}\n')
                         print(f'{bcolors.OKGREEN}Editting{bcolors.CYAN} the combolist took {bcolors.OKGREEN}'+str(timetakenedit)+f' seconds.{bcolors.ENDC}')
                         print(f'{bcolors.OKGREEN}Cleaning & shuffling{bcolors.CYAN} the combolist took{bcolors.OKGREEN} '+str(timetakencleanshuffle)+f' seconds.{bcolors.ENDC}')
@@ -1178,25 +1170,22 @@ def localcomboedits():
                     filetypes=['*.txt']
                     default='*.txt'
                     securityrun()
-                    windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
-                    with open(tkicon,'wb') as output:
-                        output.write(windowicon.content)
-                    tk.iconbitmap(tkicon)
+                    
                     combofullpath = filedialog.askopenfilename(title = "Select a combolist file.",filetypes = (("Combolist File","*.txt"),("All files","*.*")))
                     try:
                         combopath = os.path.dirname(combofullpath)
                         comboname = os.path.basename(combopath)
                         dumpcombopath = ((os.path.splitext(combofullpath)[0])+'_dump.txt')
                         newcombopath = ((os.path.splitext(combofullpath)[0])+'_editted.txt')
-                        combobytes = open(combofullpath, "rb").read(); comboencoding = chardet.detect(combobytes).get('encoding')
-                        combolinesno = (sum(1 for line in open(combofullpath, encoding=comboencoding)))
+                        
+                        combolinesno = (sum(1 for line in open(combofullpath,"rb")))
                     except FileNotFoundError:
                         appendspecialpass()
                     print(f'{bcolors.OKGREEN}'+str(combolinesno)+f' {bcolors.CYAN}lines in combolist{bcolors.ENDC}')
-                    with open(combofullpath,"r") as q:
+                    with open(combofullpath,"rb") as q:
                         startedit = time.time()
                         print(f'\n{bcolors.OKGREEN}Reading {bcolors.CYAN}combolist...{bcolors.ENDC}')
-                        texts = q.read()
+                        texts = q.read().decode(errors='replace')
                         comboline = texts.split("\n")
                         print(f'\n{bcolors.OKGREEN}Appending {bcolors.CYAN}special characters to the end of passwords within this combolist...{bcolors.ENDC}')
                         combo = []
@@ -1236,7 +1225,7 @@ def localcomboedits():
 
                         timetakenedit = endedit - startedit
                         timetakencleanshuffle = endcleanshuffle - startcleanshuffle
-                        newcombolinesno = (sum(1 for line in open(newcombopath)))
+                        newcombolinesno = (sum(1 for line in open(newcombopath,"rb")))
                         print(f'{bcolors.OKGREEN}\nSuccess!{bcolors.CYAN} appended special characters to the end of password within your {bcolors.OKGREEN}'+str(combolinesno)+f'{bcolors.CYAN} lines combo making it into a {bcolors.OKGREEN}'+str(newcombolinesno)+f'{bcolors.CYAN} lines combo.{bcolors.ENDC}\n')
                         print(f'{bcolors.OKGREEN}Editting{bcolors.CYAN} the combolist took {bcolors.OKGREEN}'+str(timetakenedit)+f' seconds.{bcolors.ENDC}')
                         print(f'{bcolors.OKGREEN}Cleaning & shuffling{bcolors.CYAN} the combolist took{bcolors.OKGREEN} '+str(timetakencleanshuffle)+f' seconds.{bcolors.ENDC}')
@@ -1286,25 +1275,22 @@ def localcomboedits():
                     filetypes=['*.txt']
                     default='*.txt'
                     securityrun()
-                    windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
-                    with open(tkicon,'wb') as output:
-                        output.write(windowicon.content)
-                    tk.iconbitmap(tkicon)
+                    
                     combofullpath = filedialog.askopenfilename(title = "Select a combolist file.",filetypes = (("Combolist File","*.txt"),("All files","*.*")))
                     try:
                         combopath = os.path.dirname(combofullpath)
                         comboname = os.path.basename(combopath)
                         dumpcombopath = ((os.path.splitext(combofullpath)[0])+'_dump.txt')
                         newcombopath = ((os.path.splitext(combofullpath)[0])+'_editted.txt')
-                        combobytes = open(combofullpath, "rb").read(); comboencoding = chardet.detect(combobytes).get('encoding')
-                        combolinesno = (sum(1 for line in open(combofullpath, encoding=comboencoding)))
+                        
+                        combolinesno = (sum(1 for line in open(combofullpath,"rb")))
                     except FileNotFoundError:
                         invertcap()
                     print(f'{bcolors.OKGREEN}'+str(combolinesno)+f' {bcolors.CYAN}lines in combolist{bcolors.ENDC}')
-                    with open(combofullpath,"r") as q:
+                    with open(combofullpath,"rb") as q:
                         startedit = time.time()
                         print(f'\n{bcolors.OKGREEN}Reading {bcolors.CYAN}combolist...{bcolors.ENDC}')
-                        texts = q.read()
+                        texts = q.read().decode(errors='replace')
                         comboline = texts.split("\n")
                         print(f'\n{bcolors.OKGREEN}Inverting {bcolors.CYAN}capitalization of passwords within this combolist...{bcolors.ENDC}')
                         combo = []
@@ -1333,7 +1319,7 @@ def localcomboedits():
 
                         timetakenedit = endedit - startedit
                         timetakencleanshuffle = endcleanshuffle - startcleanshuffle
-                        newcombolinesno = (sum(1 for line in open(newcombopath)))
+                        newcombolinesno = (sum(1 for line in open(newcombopath,"rb")))
                         print(f'{bcolors.OKGREEN}\nSuccess!{bcolors.CYAN} inverted capitalization of passwords within your {bcolors.OKGREEN}'+str(combolinesno)+f'{bcolors.CYAN} lines combo making it into a {bcolors.OKGREEN}'+str(newcombolinesno)+f'{bcolors.CYAN} lines combo.{bcolors.ENDC}\n')
                         print(f'{bcolors.OKGREEN}Editting{bcolors.CYAN} the combolist took {bcolors.OKGREEN}'+str(timetakenedit)+f' seconds.{bcolors.ENDC}')
                         print(f'{bcolors.OKGREEN}Cleaning & shuffling{bcolors.CYAN} the combolist took{bcolors.OKGREEN} '+str(timetakencleanshuffle)+f' seconds.{bcolors.ENDC}')
@@ -1506,16 +1492,12 @@ def remotecomboedits():
             filetypes=['*.txt']
             default='*.txt'
             securityrun()
-            windowicon = requests.get("https://medusa.tools/icons/icon.ico") # remote medusa icon files
-            with open(tkicon,'wb') as output:
-                    output.write(windowicon.content)
-            tk.iconbitmap(tkicon)
             combofullpath = filedialog.askopenfilename(title = "Select a combolist file.",filetypes = (("Combolist File","*.txt"),("All files","*.*")))
-            combobytes = open(combofullpath, "rb").read(); comboencoding = chardet.detect(combobytes).get('encoding')
-            combolinesno = (sum(1 for line in open(combofullpath, encoding=comboencoding)))
-            with open(combofullpath,"r") as q:
+            
+            combolinesno = (sum(1 for line in open(combofullpath,"rb")))
+            with open(combofullpath,"rb") as q:
                 print(log+'Reading combolist...')
-                texts = q.read()
+                texts = q.read().decode(errors='replace')
                 comboline = texts.split("\n")
                 combolist = []
                 for i in range(combolinesno):
@@ -1655,23 +1637,7 @@ centered = (f"""{bcolors.OKBLUE}
            {bcolors.ENDC}""")
 
 print(centered)
-version = "1.0.0"
-
-versionid = (((requests.get('https://medusa.tools/logins/version.txt')).content).decode('utf-8')) # remote medusa version verification
-time.sleep(1)
-
-
-if version == versionid:
-    verified = ("Medusa is up-to-date, v"+version+"\n")
-    for char in verified:
-        time.sleep(0.010)
-        sys.stdout.write(char)
-        sys.stdout.flush()
-    pass
-else:
-    print("\n This version of Medusa is outdated. Please update your client.")
-    input("\n Press enter to close...")
-    sys.exit(0)
+version = '1.0.0'
 
 time.sleep(1)
 
@@ -1682,7 +1648,29 @@ while loop:
         PORT = 56420        # The port used by the server - currently set to medusa's listener running on localhost
         s.connect((HOST, PORT)) # connects to medusa authentication server
         s.send((localhwid.encode())) # sends hwid to medusa authentication server
+        time.sleep(1)
+        s.send((version.encode())) # sends version id to medusa server
         authvalue = s.recv(128).decode() # receives authentication reponse from medusa authentication server
+        if authvalue == '3':
+            os.system('cls' if os.name == 'nt' else 'clear')
+            loop = False
+            print(error)
+            print("\n")
+            print("\n")
+            print("\n")
+            print("Failed to authenticate, and your client is outdated, please update your Medusa client and try again..")
+            input("\nPress enter to close...")
+            sys.exit(0)
+        if authvalue == '2':
+            os.system('cls' if os.name == 'nt' else 'clear')
+            loop = False
+            print(error)
+            print("\n")
+            print("\n")
+            print("\n")
+            print("Login successful, but your client is outdated, please update your Medusa client and try again..")
+            input("\nPress enter to close...")
+            sys.exit(0)
         if authvalue =='1': # verifies medusa authentication response as successful
             suc = (f"\n{bcolors.OKGREEN}Authentication successful...{bcolors.ENDC}")
             for char in suc:
@@ -1706,7 +1694,7 @@ while loop:
                 sys.stdout.flush()
             time.sleep(1)
             mainui()
-        if authvalue == '0':
+        if authvalue == '0': #
             os.system('cls' if os.name == 'nt' else 'clear')
             loop = False
             print(error)

@@ -1,7 +1,0 @@
-selenium
-send
-requests
-chardet
-psutil
-datetime
-pygame
