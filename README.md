@@ -16,5 +16,5 @@ then ```python3 ./server/auth/auth.py```
 (keep this running in one terminal window)
 
 **Medusa Client**  
-Run ```pip3 install -r ./windows/requirements.txt``` or ```pip3 install -r ./macos/requirements.txt```
+Run ```pip3 install -r ./windows/requirements.txt``` or ```pip3 install -r ./macos/requirements.txt```  
 then ```python3 ./windows/windows.py``` or ```python3 ./macos/macos.py```
