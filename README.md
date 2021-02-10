@@ -5,7 +5,7 @@
 
 ![](img/medusa-mainui.png)
 
-*Medusa is a fully-fledged advanced combolist editor that is able to take advantage of a variety of combolist edit options. It supports a SOCKET connection to remote a remote editor client. This is a proof-of-concept program.
+Medusa is a fully-fledged advanced combolist editor that is able to take advantage of a variety of combolist edit options. It supports a SOCKET connection to remote a remote editor client. This is a proof-of-concept program.
 
 ![](img/medusa-localui.png)
 
@@ -21,5 +21,5 @@ then ```python3 ./windows/windows.py``` or ```python3 ./macos/macos.py```
 
 **Windows Host - Remote Editor Server (optional)**  
 Run ```pip3 install -r ./server/editor/requirements.txt```
-then ```python3 ./server/editor/editor.py```
+then ```python3 ./server/editor/editor.py```  
 (set to default to run on 127.0.0.1, port 34280)
