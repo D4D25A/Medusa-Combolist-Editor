@@ -10,8 +10,9 @@ Medusa is a fully-fledged advanced combolist editor that is able to take advanta
 
 ### Current issues
 - Need a lot of cleanup
-- Medusa is single-threaded
-- It uses a (local) auth server to run because I left over code from when Medusa was going to be sold
+- Is single-threaded
+- Poor memory optimization - may result in a MemoryError exception depending on memory available and the size of the combolist
+- It uses a (local) auth server to run because I left code from when Medusa was going to be sold
 
 ### Quick start guide for Medusa 
 **1. Authentication Server (required)**  
