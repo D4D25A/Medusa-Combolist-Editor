@@ -2,6 +2,7 @@
 
 ## A advanced multi-function combolist editor written in one python file.
 *Medusa is a proof-of-concept multi-function advanced combolist editor which has a variety of editing features.*
+***Medusa has been officially deprecated as of January 15, 2021***
 
 ![](img/medusa-localui.png)
 
