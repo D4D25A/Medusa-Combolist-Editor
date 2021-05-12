@@ -6,7 +6,7 @@
 ![](img/medusa-localui.png)
 
 ### Information
-Medusa is a fully-fledged advanced combolist editor that is able to take advantage of a variety of combolist edit options. It supports a SOCKET connection to remote a remote editor client.
+Medusa is a fully-fledged advanced combolist editor that is able to take advantage of a variety of combolist edit options. It supports a SOCKET connection to a remote editor client.
 
 ### Current issues
 - Need a lot of cleanup
