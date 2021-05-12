@@ -12,7 +12,7 @@ Medusa is a fully-fledged advanced combolist editor that is able to take advanta
 ### Current issues
 - Need a lot of cleanup
 - Is single-threaded
-- Poor memory optimization - may result in a MemoryError exception depending on memory available and the size of the combolist
+- Poor memory optimization - may result in a MemoryError exception depending on memory available, edit option, and the size of the combolist
 - It uses a (local) auth server to run because I left code from when Medusa was going to be sold
 
 ### Quick start guide for Medusa 
